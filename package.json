@@ -1,0 +1,23 @@
+{
+  "name": "node-readme-hw-wk9",
+  "version": "1.0.0",
+  "description": "ReadMe generator that uses node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NatalyaCo/Node-ReadMe-Hw-Wk9.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NatalyaCo/Node-ReadMe-Hw-Wk9/issues"
+  },
+  "homepage": "https://github.com/NatalyaCo/Node-ReadMe-Hw-Wk9#readme",
+  "dependencies": {
+    "inquirer": "^8.2.2"
+  }
+}
