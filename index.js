@@ -9,6 +9,12 @@ const promptUser = () => {
         message: 'What is your Project name?',
       },
       {
+        type: 'list',
+        name: 'license',
+        message: 'Choose license you are using',
+        choices: ['None', 'MIT License', 'Apache License 2.0', 'Boost Software License 1.0', 'Eclipse Public License 2.0', 'Mozilla Public License 2.0']
+      },
+      {
         type: 'input',
         name: 'description',
         message: 'Write a short description of your project',
@@ -16,15 +22,32 @@ const promptUser = () => {
       {
         type: 'input',
         name: 'usage',
-        message: 'Descrribe the usage',
+        message: 'What does the user need to know before running this program?',
       },
       {
         type: 'input',
         name: 'install',
-        message: 'Installation procedures.',
+        message: 'Installation procedures and commands to enter to run this program',
       },
+
+      {
+          type: 'input',
+          name: 'tests',
+          message: 'What command does the user need to enter to run tests?'
+
+      },
+      {
+          type: 'input',
+          name: 'contribute',
+          message: 'What are your contribution guidelines for this project?',
+      }
+      
     ]);
+    
 };
+
+
+
 const generateHTML= ({ name, description, usage, install }) => 
 
 `<!DOCTYPE html>
