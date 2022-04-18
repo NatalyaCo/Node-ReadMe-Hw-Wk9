@@ -40,15 +40,21 @@ const promptUser = () => {
           type: 'input',
           name: 'contribute',
           message: 'What are your contribution guidelines for this project?',
-      }
-      
+      },
+
+     {
+         type: 'input',
+         name: 'questions',
+         message: 'Enter your email',
+     }, 
+
     ]);
     
 };
 
 
 
-const generateHTML= ({ name, description, usage, install }) => 
+const generateHTML= ({ name, license, description, usage, install, tests, contribute, questions }) => 
 
 `<!DOCTYPE html>
 <html lang="en">
@@ -63,14 +69,35 @@ const generateHTML= ({ name, description, usage, install }) =>
     <div class="container">
     <h3>README GENERATOR <span class="badge badge-secondary">By Natalya</span></h3>
       <h1 class="display-4">ReadMe File for ${name}</h1>
-      <p class="lead">Project description ${description}.</p>
+      <p class="lead">License Used ${license}</p>
       
-      <ul class="list-group">
-        <li class="list-group-item">Usage ${usage}</li>
-        <li class="list-group-item">Intallation ${install}</li>
-      </ul>
+      
     </div>
   </div>
+
+  <div class="row">
+  <div class="col-4">
+    <div class="list-group" id="list-tab" role="tablist">
+      <a class="list-group-item list-group-item-action active" id="list-descr-list" data-toggle="list" href="#list-descr" role="tab" aria-controls="descr">Description</a>
+      <a class="list-group-item list-group-item-action" id="list-install-list" data-toggle="list" href="#list-install" role="tab" aria-controls="install">Installation </a>
+      <a class="list-group-item list-group-item-action" id="list-usage-list" data-toggle="list" href="#list-usage" role="tab" aria-controls="usage">Usage</a>
+      <a class="list-group-item list-group-item-action" id="list-contrib-list" data-toggle="list" href="#list-contrib" role="tab" aria-controls="contrib">Contributions</a>
+      <a class="list-group-item list-group-item-action" id="list-tests-list" data-toggle="list" href="#list-tests" role="tab" aria-controls="tests">Tests</a>
+      <a class="list-group-item list-group-item-action" id="list-questions-list" data-toggle="list" href="#list-questions" role="tab" aria-controls="questions">Questions</a>
+      </div>
+  </div>
+  <div class="col-8">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="list-descr" role="tabpanel" aria-labelledby="list-descr-list">${description}</div>
+      <div class="tab-pane fade" id="list-install" role="tabpanel" aria-labelledby="list-install-list">${install}</div>
+      <div class="tab-pane fade" id="list-usage" role="tabpanel" aria-labelledby="list-usage-list">${usage}</div>
+      <div class="tab-pane fade" id="list-contrib" role="tabpanel" aria-labelledby="list-contrib-list">${tests}</div>
+      <div class="tab-pane fade" id="list-tests" role="tabpanel" aria-labelledby="list-tests-list">${contribute}</div>
+      <div class="tab-pane fade" id="list-questions" role="tabpanel" aria-labelledby="list-questions-list">${questions}</div>
+    </div>
+  </div>
+</div>
+
   </body>
   </html>`
 
@@ -83,6 +110,17 @@ const generateHTML= ({ name, description, usage, install }) =>
   };
   
   init();
+
+  //to activate the list
+//   $('#myList a').on('click', function (e) {
+//     e.preventDefault()
+//     $(this).tab('show')
+//   });
+
+  //to activate each tab
+//   $('#myList a[href="#install"]').tab('show')
+
+
   
 
 //   function renderLicenseBadge(license) {
@@ -102,24 +140,13 @@ const generateHTML= ({ name, description, usage, install }) =>
 //   };
 //  console.log (license);
   
-//   function generateMarkdown(data) {
+  function generateMarkdown(data) {
 
 
-//     return `# ${data.title}
-//     ## license 
-//     ${renderLicenseBadge(license)}` 
+    return `#{data.title}
+    ## license 
+    ${renderLicenseBadge(license)} 
     
     
-//     }
-// console.log(data);
-
-//   console.log(answer.title );
-//   console.log(answer.description);
-//   console.log(answer.tableCont );  
-//   console.log(answer.installation);
-//   console.log(answer.usage);
-//   console.log(answer.license);
-//   console.log(answer.contrGuide);
-//   console.log(answer.tests);
-//   console.log(answer.questions);
-  
+  } 
+console.log (data);
