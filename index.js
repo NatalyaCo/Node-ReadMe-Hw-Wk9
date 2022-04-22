@@ -1,7 +1,12 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const util = require('util');
 
-const promptUser = () => {
+const writeFileAsync = util.promisify(fs.writeFile);
+
+
+
+const uswrPrompts = () => {
     return inquirer.prompt([
       {
         type: 'input',
@@ -52,101 +57,35 @@ const promptUser = () => {
     
 };
 
+function generateMD(data){
+     
+let badge = "";
+if(data.license == "MIT License"){
+    badge = "![License](https://img.shields.io/static/v1?label=License&message=MIT&color=yellowgreen&style=plastic)"
+}else if (data.license == "APACHE License 2.0"){
+    badge = "![License](https://img.shields.io/static/v1?label=License&message=APACHE2.0&color=green&style=plastic)"
+}else if (data.license == "Boost Software License 1.0"){
+    badge = "![License](https://img.shields.io/static/v1?label=License&message=Boost.0&color=yellow&style=plastic)"
+}else if (data.license == "Eclipse Public License 2.0"){
+    badge = "![License](https://img.shields.io/static/v1?label=License&message=Eclipse.0&color=orange&style=plastic)"
+}else if (data.license == "Mozilla Public License 2.0"){
+    badge = "![License](https://img.shields.io/static/v1?label=License&message=Mozilla.0&color=blue&style=plastic)"
 
 
-const generateHTML= ({ name, license, description, usage, install, tests, contribute, questions }) => 
-
-`<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-    <h3>README GENERATOR <span class="badge badge-secondary">By Natalya</span></h3>
-      <h1 class="display-4">ReadMe File for ${name}</h1>
-      <p class="lead">License Used ${license}</p>
-      
-      
-    </div>
-  </div>
-
-  <div class="row">
-  <div class="col-4">
-    <div class="list-group" id="list-tab" role="tablist">
-      <a class="list-group-item list-group-item-action active" id="list-descr-list" data-toggle="list" href="#list-descr" role="tab" aria-controls="descr">Description</a>
-      <a class="list-group-item list-group-item-action" id="list-install-list" data-toggle="list" href="#list-install" role="tab" aria-controls="install">Installation </a>
-      <a class="list-group-item list-group-item-action" id="list-usage-list" data-toggle="list" href="#list-usage" role="tab" aria-controls="usage">Usage</a>
-      <a class="list-group-item list-group-item-action" id="list-contrib-list" data-toggle="list" href="#list-contrib" role="tab" aria-controls="contrib">Contributions</a>
-      <a class="list-group-item list-group-item-action" id="list-tests-list" data-toggle="list" href="#list-tests" role="tab" aria-controls="tests">Tests</a>
-      <a class="list-group-item list-group-item-action" id="list-questions-list" data-toggle="list" href="#list-questions" role="tab" aria-controls="questions">Questions</a>
-      </div>
-  </div>
-  <div class="col-8">
-    <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="list-descr" role="tabpanel" aria-labelledby="list-descr-list">${description}</div>
-      <div class="tab-pane fade" id="list-install" role="tabpanel" aria-labelledby="list-install-list">${install}</div>
-      <div class="tab-pane fade" id="list-usage" role="tabpanel" aria-labelledby="list-usage-list">${usage}</div>
-      <div class="tab-pane fade" id="list-contrib" role="tabpanel" aria-labelledby="list-contrib-list">${tests}</div>
-      <div class="tab-pane fade" id="list-tests" role="tabpanel" aria-labelledby="list-tests-list">${contribute}</div>
-      <div class="tab-pane fade" id="list-questions" role="tabpanel" aria-labelledby="list-questions-list">${questions}</div>
-    </div>
-  </div>
-</div>
-
-  </body>
-  </html>`
-
-  const init = () => {
-    promptUser()
-      // Use writeFileSync method to use promises instead of a callback function
-      .then((answers) => fs.writeFileSync('index.html', generateHTML(answers)))
-      .then(() => console.log('Successfully wrote to index.html'))
-      .catch((err) => console.error(err));
-  };
+ 
   
-  init();
-
-  //to activate the list
-//   $('#myList a').on('click', function (e) {
-//     e.preventDefault()
-//     $(this).tab('show')
-//   });
-
-  //to activate each tab
-//   $('#myList a[href="#install"]').tab('show')
+//   function generateMarkdown(data) {
 
 
-  
-
-//   function renderLicenseBadge(license) {
-//     let licenseType = license
-//     let yourLicense = ''
-
-//     if(licenseType === 'MIT') {
-//       yourLicense = `![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)`
-//     } else if (licenseType === 'GPLv3') {
-//       yourLicense = `![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)`
-//     } else if (licenseType === 'GPL') {
-//       yourLicense = `![GPL license](https://img.shields.io/badge/License-GPL-blue.svg)`
-//     } else { licenseType === ' '
-//          }
-//     return yourLicense;
-   
-//   };
-//  console.log (license);
-  
-  function generateMarkdown(data) {
-
-
-    return `#{data.title}
-    ## license 
-    ${renderLicenseBadge(license)} 
+//     return `# ${data.title}
+//     ## license 
+//     ${renderLicenseBadge(license)}` 
     
     
-  } 
-console.log (data);
+//     }
+// console.log(data);
+
+uswrPrompts()
+.then((data) => writeFileAsync('generatedREADME.md', generateMD(data)))
+    .then(() => console.log('Successfully wrote to index.html'))
+    .catch((err) => console.error(err));
