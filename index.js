@@ -66,7 +66,7 @@ message: 'Installation procedures and commands to enter to run this program',
  {
  type: 'input',
  name: 'questions',
- message: 'Enter your email',
+ message: 'Enter your contact information if user has any questions',
  }, 
 
 ]);
@@ -125,5 +125,5 @@ ${data.author} at ${data.email}
 
 uswrPrompts()
 .then((data) => writeFileAsync('generatedREADME.md', generateMD(data)))
-.then(() => console.log('Successfully wrote to index.html'))
+.then(() => console.log('Successfully created file'))
 .catch((err) => console.error(err));
