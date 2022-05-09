@@ -48,7 +48,7 @@ message: 'What does the user need to know before running this program?',
   {
 type: 'input',
 name: 'install',
-message: 'Installation procedures and commands to enter to run this program',
+message: 'Installations required to run this program',
   },
 
   {
